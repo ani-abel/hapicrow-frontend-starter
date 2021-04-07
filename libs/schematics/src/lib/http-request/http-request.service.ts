@@ -17,7 +17,7 @@ export class HttpRequestService {
       .pipe(
         throttleTime(500),
         tap((data: Todo[]) => {
-          console.log({ request: data })
+          console.log({ result: data })
         })
       );
   }
