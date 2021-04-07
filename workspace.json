@@ -1,10 +1,451 @@
 {
-  
-  
   "version": 2,
-  
-  "projects": {},
-  "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+  "projects": {
+    "website": {
+      "projectType": "application",
+      "root": "apps/website",
+      "sourceRoot": "apps/website/src",
+      "prefix": "hapicrow-frontend-demo",
+      "targets": {
+        "build": {
+          "executor": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/website",
+            "index": "apps/website/src/index.html",
+            "main": "apps/website/src/main.ts",
+            "polyfills": "apps/website/src/polyfills.ts",
+            "tsConfig": "apps/website/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/website/src/favicon.ico",
+              "apps/website/src/assets"
+            ],
+            "styles": ["apps/website/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/website/src/environments/environment.ts",
+                  "with": "apps/website/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "options": { "browserTarget": "website:build" },
+          "configurations": {
+            "production": { "browserTarget": "website:build:production" }
+          }
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "website:build" }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/website/src/**/*.ts",
+              "apps/website/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/website"],
+          "options": {
+            "jestConfig": "apps/website/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "website-e2e": {
+      "root": "apps/website-e2e",
+      "sourceRoot": "apps/website-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/website-e2e/cypress.json",
+            "tsConfig": "apps/website-e2e/tsconfig.e2e.json",
+            "devServerTarget": "website:serve"
+          },
+          "configurations": {
+            "production": { "devServerTarget": "website:serve:production" }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["apps/website-e2e/**/*.{js,ts}"] }
+        }
+      }
+    },
+    "support-app": {
+      "projectType": "application",
+      "root": "apps/support-app",
+      "sourceRoot": "apps/support-app/src",
+      "prefix": "hapicrow-frontend-demo",
+      "targets": {
+        "build": {
+          "executor": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/support-app",
+            "index": "apps/support-app/src/index.html",
+            "main": "apps/support-app/src/main.ts",
+            "polyfills": "apps/support-app/src/polyfills.ts",
+            "tsConfig": "apps/support-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/support-app/src/favicon.ico",
+              "apps/support-app/src/assets"
+            ],
+            "styles": ["apps/support-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/support-app/src/environments/environment.ts",
+                  "with": "apps/support-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "options": { "browserTarget": "support-app:build" },
+          "configurations": {
+            "production": { "browserTarget": "support-app:build:production" }
+          }
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "support-app:build" }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/support-app/src/**/*.ts",
+              "apps/support-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/support-app"],
+          "options": {
+            "jestConfig": "apps/support-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "support-app-e2e": {
+      "root": "apps/support-app-e2e",
+      "sourceRoot": "apps/support-app-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/support-app-e2e/cypress.json",
+            "tsConfig": "apps/support-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "support-app:serve"
+          },
+          "configurations": {
+            "production": { "devServerTarget": "support-app:serve:production" }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/support-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "mobile-app": {
+      "projectType": "application",
+      "root": "apps/mobile-app",
+      "sourceRoot": "apps/mobile-app/src",
+      "prefix": "hapicrow-frontend-demo",
+      "targets": {
+        "build": {
+          "executor": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/mobile-app",
+            "index": "apps/mobile-app/src/index.html",
+            "main": "apps/mobile-app/src/main.ts",
+            "polyfills": "apps/mobile-app/src/polyfills.ts",
+            "tsConfig": "apps/mobile-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/mobile-app/src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
+              }
+            ],
+            "styles": [
+              "apps/mobile-app/src/styles.scss",
+              { "input": "apps\\mobile-app/src/theme/variables.scss" }
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/mobile-app/src/environments/environment.ts",
+                  "with": "apps/mobile-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "options": { "browserTarget": "mobile-app:build" },
+          "configurations": {
+            "production": { "browserTarget": "mobile-app:build:production" }
+          }
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "mobile-app:build" }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/mobile-app/src/**/*.ts",
+              "apps/mobile-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/mobile-app"],
+          "options": {
+            "jestConfig": "apps/mobile-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "cap": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": { "cmd": "--help" }
+        },
+        "add": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": { "cmd": "add", "packageInstall": true },
+          "configurations": {
+            "ios": { "cmd": "add ios" },
+            "android": { "cmd": "add android" }
+          }
+        },
+        "copy": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": { "cmd": "copy", "packageInstall": false },
+          "configurations": {
+            "ios": { "cmd": "copy ios" },
+            "android": { "cmd": "copy android" }
+          }
+        },
+        "open": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": { "cmd": "open", "packageInstall": false },
+          "configurations": {
+            "ios": { "cmd": "open ios" },
+            "android": { "cmd": "open android" }
+          }
+        },
+        "sync": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": { "cmd": "sync", "packageInstall": true },
+          "configurations": {
+            "ios": { "cmd": "sync ios" },
+            "android": { "cmd": "sync android" }
+          }
+        },
+        "update": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": { "cmd": "update", "packageInstall": true },
+          "configurations": {
+            "ios": { "cmd": "update ios" },
+            "android": { "cmd": "update android" }
+          }
+        }
+      }
+    },
+    "mobile-app-e2e": {
+      "root": "apps/mobile-app-e2e",
+      "sourceRoot": "apps/mobile-app-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/mobile-app-e2e/cypress.json",
+            "tsConfig": "apps/mobile-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "mobile-app:serve"
+          },
+          "configurations": {
+            "production": { "devServerTarget": "mobile-app:serve:production" }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/mobile-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "schematics": {
+      "projectType": "library",
+      "root": "libs/schematics",
+      "sourceRoot": "libs/schematics/src",
+      "prefix": "hapicrow-frontend-demo",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/schematics/src/**/*.ts",
+              "libs/schematics/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/schematics"],
+          "options": {
+            "jestConfig": "libs/schematics/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "utils": {
+      "root": "libs/utils",
+      "sourceRoot": "libs/utils/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/utils/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/utils"],
+          "options": {
+            "jestConfig": "libs/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "interfaces": {
+      "root": "libs/interfaces",
+      "sourceRoot": "libs/interfaces/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/interfaces/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/interfaces"],
+          "options": {
+            "jestConfig": "libs/interfaces/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": { "defaultCollection": "@nrwl/angular" },
+  "generators": {
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": { "style": "scss" }
+  },
+  "defaultProject": "website"
 }

@@ -1,0 +1,13 @@
+{
+  "appId": "com.hapicrow.escrow",
+  "appName": "mobile-app",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "../../dist/apps/mobile-app",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

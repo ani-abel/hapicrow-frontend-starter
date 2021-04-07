@@ -1,14 +1,9 @@
 {
   "npmScope": "hapicrow-frontend-demo",
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
@@ -16,16 +11,24 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "MDIyZjIyOGUtNjM1YS00YTNhLWIyODItZGY4ZjhmZWMzNTBmfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "website": { "tags": [] },
+    "website-e2e": { "tags": [], "implicitDependencies": ["website"] },
+    "support-app": { "tags": [] },
+    "support-app-e2e": { "tags": [], "implicitDependencies": ["support-app"] },
+    "mobile-app": { "tags": [] },
+    "mobile-app-e2e": { "tags": [], "implicitDependencies": ["mobile-app"] },
+    "schematics": { "tags": [] },
+    "utils": { "tags": [] },
+    "interfaces": { "tags": [] }
+  }
 }
